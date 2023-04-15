@@ -18,7 +18,7 @@ This is web application allows you to interact with [Federeco](https://github.co
 
 1. Clone the project.
 
-   `git clone https://github.com/charanveer/federatedflix.git`
+   `git clone https://github.com/Charanveer/federeco-federatedflix.git`
 
 2. Change dirctory to federatedflex
 
