@@ -131,3 +131,7 @@ dmypy.json
 # Sensitive or high-churn files
 /.idea/
 /pretrained/
+
+# Federated Flix ignore files
+FederatedFlix/node_modules/
+FederatedFlix/target/

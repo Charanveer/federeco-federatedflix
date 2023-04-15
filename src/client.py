@@ -1,16 +1,14 @@
-from federeco.config import BATCH_SIZE, DEVICE, LEARNING_RATE, LOCAL_EPOCHS
-from typing import List, Optional, Any, Tuple
-from torch import Tensor
+from config import BATCH_SIZE, DEVICE, LEARNING_RATE, LOCAL_EPOCHS
+from typing import List, Optional
 import pandas as pd
 import numpy as np
-import federeco
+import collections
 import torch
 
 
-class Client(federeco.client.Client):
+class Client:
 
     def __init__(self, client_id: int):
-        super().__init__(client_id)
         self.client_id = client_id
         self.client_data = None
 
@@ -21,12 +19,7 @@ class Client(federeco.client.Client):
             'label': data_array[2]
         })
 
-    def train(self, server_model: torch.nn.Module) -> Tuple[dict[str, Any], Tensor]:
-        """
-        single round of local training for client
-        :param server_model: pytorch model that can be trained on user data
-        :return: weights of the server model, training loss
-        """
+    def train(self, server_model: torch.nn.Module) -> collections.OrderedDict:
         user_input, item_input = self.client_data['user_id'], self.client_data['item_id']
         labels = self.client_data['label']
 
@@ -39,7 +32,6 @@ class Client(federeco.client.Client):
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
 
         optimizer = torch.optim.AdamW(server_model.parameters(), lr=LEARNING_RATE)
-        loss = None
         for _ in range(LOCAL_EPOCHS):
             for _, (u, i, l) in enumerate(dataloader):
                 logits, loss = server_model(u, i, l)
@@ -49,14 +41,13 @@ class Client(federeco.client.Client):
                 torch.nn.utils.clip_grad_norm_(server_model.parameters(), 0.5)
                 optimizer.step()
 
-        return server_model.state_dict(), loss
+        return server_model.state_dict()
 
-    def generate_recommendation(self, server_model: torch.nn.Module,
-                                num_items: int,  k: Optional[int] = 5) -> List[int]:
+    def generate_recommendation(self, server_model: torch.nn.Module, num_items: int,  k: Optional[int] = 5) -> List[int]:
         """
         :param server_model: server model which will be used to generate predictions
-        :param num_items: total number of unique items in dataset
         :param k: number of recommendations to generate
+        :param num_items: total number of unique items in dataset
         :return: list of `k` movie recommendations
         """
         # get movies that user has not yet interacted with

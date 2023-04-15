@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Federated Flix</title>
+        <h:outputStylesheet library="css" name="global.css" />
+    </h:head>
+    <h:body>
+        <div class="flex h-screen">
+            <div class="m-auto" style="max-width: 415px;">
+                <p:graphicImage name="federatedflix.png" library="images" styleClass="m-auto"/>
+                <h:form id="auth-form" class="ui-fluid formgrid grid">
+                    <p:growl id="growl" showDetail="true" for="auth-form"/>
+                    <div class="field col-12">
+                        <p:outputLabel for="@next" value="User ID"/>
+                        <p:inputText id="userid" value="#{sessionManager.userID}"/>
+                        <p:message for="@previous" />
+                    </div>
+                    <div class="field col-12">
+                        <p:outputLabel for="@next" value="Password"/>
+                        <p:password id="password" value="#{sessionManager.password}" toggleMask="true" redisplay="true" styleClass="w-full"/>
+                        <p:message for="@previous" />
+                    </div>
+
+                    <div class="field col-6">
+                        <p:commandButton id="login-button" value="Sign In" action="#{sessionManager.login()}" validateClient="true" update="@form" />
+                    </div>
+                    <div class="field col-6">
+                        <p:commandButton id="register-button" value="Register" styleClass="ui-button-outlined" action="#{sessionManager.register()}" validateClient="true" update="@form" />
+                    </div>
+                </h:form>
+            </div> 
+        </div>
+
+    </h:body>
+</html>

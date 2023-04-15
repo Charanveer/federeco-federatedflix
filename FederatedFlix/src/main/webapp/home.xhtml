@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template = "/WEB-INF/layout/base.xhtml">
+
+        <ui:define name = "content">
+
+            <script>
+                $(document).ready(function () {
+                    rc();
+                });
+            </script>
+
+            <div class="wrapper grid mt-4">
+                <div class="col-12  mb-6">
+                    <div class="flex flex-column gap-3">
+                        <span class="text-6xl font-semibold gradient-text w-min">Welcome</span>
+                        <span class="text-4xl font-semibold gradient-text" style="width: fit-content;">User ##{sessionManager.randomUserID}</span>
+                    </div>
+                </div>
+
+                <div class="col-12 md:col-6 md:pr-6">
+                    <div class="flex justify-content-center">
+                        <span class="text-2xl font-semibold gradient-sub-text" style="width: fit-content;">Recommended Movies</span>
+                    </div>
+                    <h:form id="ratings-table" styleClass="mt-4">
+                        <p:remoteCommand name="rc" update="@form" action="#{moviesRecController.getmovies()}"/>
+                        <p:outputPanel rendered="#{moviesRecController.isLoading()}">
+                            <p:skeleton styleClass="w-full h-4rem mb-1" />
+                            <p:skeleton styleClass="w-full h-4rem mb-1" />
+                            <p:skeleton styleClass="w-full h-4rem mb-1" />
+                            <p:skeleton styleClass="w-full h-4rem mb-1" />
+                            <p:skeleton styleClass="w-full h-4rem mb-1" />
+                        </p:outputPanel>
+
+                        <p:dataTable var="movie" value="#{moviesRecController.movies}" rendered="#{not moviesRecController.isLoading()}">
+                            <p:column headerText="Movie ID" >
+                                <h:outputText value="#{movie.movieID}" />
+                            </p:column>
+
+                            <p:column headerText="Movie">
+                                <h:outputText value="#{movie.movieName}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                </div>
+                <div class="col-12 md:col-6 md:pl-6">
+                    <div class="flex justify-content-center">
+                        <span class="text-2xl font-semibold gradient-sub-text" style="width: fit-content;">Previous Ratings</span>
+                    </div>
+                    <h:form id="previous-ratings-table"  styleClass="mt-4">
+                        <p:dataTable var="entry" 
+                                     value="#{userMovieRatingsController.previousMovieRatingsList}"
+                                     scrollable="true" scrollHeight="644">
+                            <p:column headerText="Movie">
+                                #{entry.key}
+                            </p:column>
+                            <p:column headerText="Rating">
+                                #{entry.value}
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </div>
+
+
+
+
+        </ui:define>
+
+
+
+    </ui:composition>
+</html>

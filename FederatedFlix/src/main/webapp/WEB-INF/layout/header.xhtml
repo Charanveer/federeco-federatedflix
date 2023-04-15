@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition> 
+        <h:form>
+            <p:menubar>
+                <p:menuitem outcome="/home">
+                    <div class="flex align-items-center">
+                        <!--                            <img
+                                                        src="https://www.smartflix.com/resources/smartflix-logo.png"
+                                                        alt="logo"
+                                                        class="w-10rem"
+                                                        />-->
+                        <p:graphicImage name="federatedflix.png" library="images"
+                                        styleClass="w-15rem"/>
+                    </div>
+
+                </p:menuitem>
+
+                <f:facet name="options">
+                    <div class="flex align-items-center h-4rem theme-toggle-button">
+                        <p:button icon="pi pi-github" styleClass="rounded-button ui-button-flat" href="https://github.com/Ach113/federeco" target="_blank"/>
+                        <p:button value="About" styleClass="ui-button-flat" outcome="/about"/>
+                        <p:commandButton value="Sign Out" styleClass="ui-button-outlined" icon="pi pi-fw pi-sign-out" action="#{sessionManager.signOut()}" />
+                        <p:commandButton action="#{themeManager.toggleTheme()}"
+                                         icon="pi pi-${themeManager.themeIcon}"
+                                         update="@this"
+                                         styleClass="ml-6 rounded-button surface-900 border-none text-0"/>
+                    </div>
+                </f:facet>
+            </p:menubar>
+        </h:form>
+    </ui:composition>
+</html>

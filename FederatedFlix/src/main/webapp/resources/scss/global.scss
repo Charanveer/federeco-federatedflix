@@ -1,0 +1,203 @@
+@import '../../../../../node_modules/primeflex/primeflex.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    margin: 0px;
+    padding-bottom: 4rem;
+}
+
+body .ui-widget {
+    font-family: 'Inter', sans-serif;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;          /* Footer height */
+}
+
+.wrapper {
+    margin-right: auto; /* 1 */
+    margin-left:  auto; /* 1 */
+
+    max-width: 960px; /* 2 */
+
+    padding-right: 10px; /* 3 */
+    padding-left:  10px; /* 3 */
+}
+
+.ui-menu-list {
+    position: static;
+    margin-right: auto !important; /* 1 */
+    margin-left:  auto !important; /* 1 */
+
+    max-width: 960px; /* 2 */
+
+    padding-right: 10px; /* 3 */
+    padding-left:  10px; /* 3 */
+}
+
+.hero-bg {
+    background-image: url("https://wallpapers.com/images/hd/transformers-bumblebee-swc1yombhsuacs4a.jpg");
+}
+
+body .ui-messages>div {
+    padding: 1rem;
+}
+
+
+body .ui-button {
+    background: #d9362b;
+    color: #212529;
+    border: 1px solid #d9362b;
+}
+
+body .ui-button.ui-state-hover {
+    background: #b32d23;
+    color: #212529;
+    border: 1px solid #b32d23;
+}
+
+body .ui-button.ui-state-active {
+    background: #b32d23;
+    color: #212529;
+    border: 1px solid #ff6459;
+}
+
+body .ui-button.ui-state-focus {
+    box-shadow: 0 0 0 1px #ff6459 !important;
+}
+
+body .ui-button.ui-button-outlined {
+    color: #d9362b;
+}
+
+body .ui-button.ui-button-outlined.ui-state-hover {
+    color: #d9362b;
+}
+body .ui-button.ui-button-outlined.ui-state-active {
+    color: #d9362b;
+}
+body .ui-button.ui-button-outlined.ui-state-focus {
+    color: #d9362b;
+}
+
+body .ui-button.ui-button-flat {
+    color: #d9362b;
+}
+
+body .ui-button.ui-button-flat.ui-state-hover {
+    color: #d9362b;
+}
+
+body .ui-button.ui-button-flat.ui-state-active {
+
+    color: #d9362b;
+}
+body .ui-button.ui-button-flat.ui-state-focus {
+    color: #d9362b;
+}
+
+
+
+.gradient-text {
+    /* Fallback: Set a background color. */
+    background-color: #CA4246;
+
+    /* Create the gradient. */
+    background-image: linear-gradient(
+        45deg,
+        #CA4246 16.666%,
+        #E16541 16.666%,
+        #E16541 33.333%,
+        #F18F43 33.333%,
+        #F18F43 50%,
+        #8B9862 50%,
+        #8B9862 66.666%,
+        #476098 66.666%,
+        #476098 83.333%,
+        #A7489B 83.333%);
+
+    /* Set the background size and repeat properties. */
+    background-size: 100%;
+    background-repeat: repeat;
+
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Animate the text when loading the element. */
+    /* This animates it on page load and when hovering out. */
+    animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
+
+}
+
+.gradient-text:hover{
+    animation: rainbow-text-simple-animation 0.5s ease-in forwards;
+}
+
+
+.gradient-sub-text {
+    /* Fallback: Set a background color. */
+    background-color: #CA4246;
+
+    /* Create the gradient. */
+    background-image: linear-gradient(
+        45deg,
+        var(--surface-700),
+        #61beb5);
+
+    /* Set the background size and repeat properties. */
+    background-size: 100%;
+    background-repeat: repeat;
+
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Animate the text when loading the element. */
+    /* This animates it on page load and when hovering out. */
+    animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
+
+}
+
+.gradient-sub-text:hover{
+    animation: rainbow-text-simple-animation 0.5s ease-in forwards;
+}
+
+
+/* Move the background and make it smaller. */
+/* Animation shown when entering the page and after the hover animation. */
+@keyframes rainbow-text-simple-animation-rev {
+    0% {
+        background-size: 650%;
+    }
+    40% {
+        background-size: 650%;
+    }
+    100% {
+        background-size: 100%;
+    }
+}
+
+/* Move the background and make it larger. */
+/* Animation shown when hovering over the text. */
+@keyframes rainbow-text-simple-animation {
+    0% {
+        background-size: 100%;
+    }
+    80% {
+        background-size: 650%;
+    }
+    100% {
+        background-size: 650%;
+    }
+}
